@@ -62,5 +62,14 @@ app.get('/jokes', async (req, res, next) => {
   }
 });
 
+app.post("/jokes", async (req, res, next) => {
+  try {
+    const joke = await Joke.create(req.body);
+    res.status(201).send(joke);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // we export the app, not listening in here, so that we can run tests
 module.exports = app;
